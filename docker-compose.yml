@@ -1,0 +1,15 @@
+version: '3'
+services:
+  airflow-exporter:
+    image: shalb/airflow-exporter:0.0.1
+   #volumes:
+   #  - ./exporter/exporter.py.yml:/opt/airflow/exporter.py.yml
+    restart: always
+   #ports:
+   #  - "9132:9132"
+    environment:
+      - TARGET_URL=http://airflow.dev.svc:8080
+      - TASKS=health,dags,dags_status
+      - LOG_LEVEL=INFO
+      - TIMEOUT=10
+

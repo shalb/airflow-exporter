@@ -1,0 +1,8 @@
+---
+target_url: 'http://airflow.dev.svc:8080'
+tasks: 'health,dags,dags_status'
+log_level: 'INFO'
+check_interval: 10
+timeout: 10
+listen_port: 9132
+name: 'airflow'
