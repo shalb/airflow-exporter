@@ -77,6 +77,7 @@ def parse_data_health(json_data):
     for service in list(json_data.keys()):
         labels = dict()
         labels['airflow_service'] = label_clean(service)
+        labels['target_url'] = label_clean(conf['target_url'])
         metric_name = '{0}_exporter_health_status'.format(conf['name'])
         description = 'Health status: 1 = OK, 0 = Fail.'
         if json_data[service]['status'] == 'healthy':
@@ -123,6 +124,7 @@ def parse_data_dags_status(json_data):
     '''Parse dags status via API'''
     labels = dict()
     labels['dag_id'] = label_clean(json_data['dag_id'])
+    labels['target_url'] = label_clean(conf['target_url'])
     metric_name = '{0}_exporter_dags_last_status'.format(conf['name'])
     description = 'Dags status: 1 = OK, 0 = Fail.'
     if json_data['state'] == 'success':
