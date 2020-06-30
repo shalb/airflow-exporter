@@ -6,3 +6,13 @@ check_interval: 10
 timeout: 10
 listen_port: 9132
 name: 'airflow'
+dag_status_map:
+  success: 1
+  failed: -1
+  running: -2
+  skipped: -3
+  queued: -4
+  up_for_retry: -5
+  up_for_reschedule: -6
+  upstream_failed: -7
+  no_status: 0

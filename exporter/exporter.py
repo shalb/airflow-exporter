@@ -127,10 +127,12 @@ def parse_data_dags_status(json_data):
     labels['target_url'] = label_clean(conf['target_url'])
     metric_name = '{0}_exporter_dags_last_status'.format(conf['name'])
     description = 'Dags status: 1 = OK, 0 = Fail.'
-    if json_data['state'] == 'success':
-        value = 1
-    else:
-        value = 0
+    status = json_data['state']
+    value = int(conf['dag_status_map'].get(status, -999))
+    if value == -999:
+        log.error('parse_data_dags_status: unknown_status: {}'.format(status))
+        airflow_exporter_up.set(0)
+        airflow_exporter_errors_total.inc()
     metric = {'metric_name': metric_name, 'labels': labels, 'description': description, 'value': value}
     data.append(metric)
     # add start_date
