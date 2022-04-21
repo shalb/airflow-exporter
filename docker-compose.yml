@@ -1,7 +1,7 @@
 version: '3'
 services:
   airflow-exporter:
-    image: shalb/airflow-exporter:0.0.2
+    image: shalb/airflow-exporter:0.0.3
    #volumes:
    #  - ./exporter/exporter.py.yml:/opt/airflow/exporter.py.yml
     restart: always

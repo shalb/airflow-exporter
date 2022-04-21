@@ -109,11 +109,14 @@ def parse_data_dags(json_data):
     data_tmp['dags'] = list()
     for line in json_data['items']:
         data_tmp['dags'].append(line['dag_id'])
+    log.debug('Got ids: {}'.format(data_tmp['dags']))
 
 def get_data_dags_status():
     '''Get dags list via API'''
     for dag_id in data_tmp['dags']:
-        req = urllib.request.Request('{}/api/experimental/dags/{}/dag_runs'.format(conf['target_url'], dag_id))
+        url = '{}/api/experimental/dags/{}/dag_runs'.format(conf['target_url'], dag_id)
+        log.debug('requesting url: {}'.format(url))
+        req = urllib.request.Request(url)
         responce = urllib.request.urlopen(req, timeout=conf['timeout'])
         raw_data = responce.read().decode()
         json_data = json.loads(raw_data)

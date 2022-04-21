@@ -3,5 +3,5 @@ services:
   airflow-exporter:
     build:
       context: ./
-    image: shalb/airflow-exporter:0.0.2
+    image: shalb/airflow-exporter:0.0.3
 
